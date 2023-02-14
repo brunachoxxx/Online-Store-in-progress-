@@ -6,11 +6,15 @@
 }
 
 body {
-  margin: 0;
+  margin: 30px;
 }
 
-#react-root > div {
-  padding: 30px;
+#react-root a {
+  text-decoration: none;
+}
+
+.nav-active {
+  font-weight: bold;
 }
 
 .btn {
@@ -37,14 +41,11 @@ body {
   color: var(--dark);
 }
 
-.app-container {
-  padding: 30px;
-}
-
 .store-front {
   display: grid;
   grid-gap: 30px;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 20px;
 }
 
 .product {
@@ -103,15 +104,6 @@ body {
 .product-buttons button:disabled {
   opacity: 0.5;
   cursor: default;
-}
-
-.dark {
-  background-color: #222;
-  color: white;
-}
-
-.dark .product {
-  background-color: #333;
 }
 
 .spinner {

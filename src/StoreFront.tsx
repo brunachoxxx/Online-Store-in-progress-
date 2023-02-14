@@ -4,10 +4,16 @@ import useSWR from "swr";
 import fetcher, { productsUrl } from "./Fetcher";
 import { useContext } from "react";
 import { AppContext } from "./AppContext";
+import clsx from "clsx";
 
 export default function StoreFront() {
-  const { data: products, error, isLoading } = useSWR(productsUrl, fetcher);
-  const { currency } = useContext(AppContext);
+  const {
+    data: products,
+    error,
+    isLoading,
+  } = useSWR(productsUrl + "products.json", fetcher);
+  const { currency, theme } = useContext(AppContext);
+  const classes = clsx({ "store-front": true, theme });
 
   if (error) {
     console.log(error);
@@ -17,7 +23,7 @@ export default function StoreFront() {
   return (
     <>
       <p>Shopping in {currency}</p>
-      <div className="store-front">
+      <div className={classes}>
         {isLoading && <Loader />}
         {products &&
           products.map((product: any) => (

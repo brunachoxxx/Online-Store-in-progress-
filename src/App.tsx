@@ -1,42 +1,36 @@
 import { useState, useContext } from "react";
 import { SWRConfig } from "swr";
-import { AppContext } from "./AppContext";
 import StoreFront from "./StoreFront";
-import clsx from "clsx";
-import Navbar from "./NavBar";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProductDetails from "./ProductDetail";
+import ProductDelivery from "./ProductDelivery";
+import Nav from "./Nav";
+import About from "./Abaut";
+import Home from "./Home";
+import NotFound from "./NotFound";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-
-  const { theme } = useContext(AppContext);
-  const classes = clsx(theme);
 
   if (loggedIn) {
     return (
       <>
         <SWRConfig>
           <BrowserRouter>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/products/:id">Product Details</Link>
-                </li>
-              </ul>
-            </nav>
+            <Nav />
             <main>
-              <div className={classes}>
-                <Routes>
-                  <Route path="/" element={<StoreFront />}></Route>
+              <Routes>
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/about" element={<About />}></Route>
+                <Route path="/products" element={<StoreFront />}></Route>
+                <Route path="/products/:id" element={<ProductDetails />}>
                   <Route
-                    path="/ProductDetails/:id"
-                    element={<ProductDetails id={id} />}
+                    path="/products/:id/delivery"
+                    element={<ProductDelivery />}
                   ></Route>
-                </Routes>
-              </div>
+                  <Route path="*" element={<NotFound />}></Route>
+                </Route>
+              </Routes>
             </main>
           </BrowserRouter>
         </SWRConfig>
