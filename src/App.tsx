@@ -1,53 +1,45 @@
-import { useState, useContext } from "react";
 import { SWRConfig } from "swr";
-import StoreFront from "./StoreFront";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProductDetails from "./ProductDetail";
-import ProductDelivery from "./ProductDelivery";
-import Nav from "./Nav";
+import NavBar from "./NavBar";
 import About from "./Abaut";
 import Home from "./Home";
 import NotFound from "./NotFound";
+import Products from "./Products";
+import Cart from "./Cart";
+import ProductDetails from "./ProductDetail";
+import ProductDetailInfo from "./ProductDetailsInfo";
+import ProductDetailNutrition from "./ProductDetailsnutrition";
+import ProductDetailStorage from "./ProductDetailStorage";
 
 export default function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  return (
+    <>
+      <SWRConfig>
+        <BrowserRouter>
+          <NavBar />
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/about" element={<About />}></Route>
+              <Route path="/products/" element={<Products />}></Route>
+              <Route path="/products/:id/" element={<ProductDetails />}>
+                <Route path="" element={<ProductDetailInfo />}></Route>
+                <Route
+                  path="nutrition"
+                  element={<ProductDetailNutrition />}
+                ></Route>
+                <Route
+                  path="storage"
+                  element={<ProductDetailStorage />}
+                ></Route>
+              </Route>
 
-  if (loggedIn) {
-    return (
-      <>
-        <SWRConfig>
-          <BrowserRouter>
-            <Nav />
-            <main>
-              <Routes>
-                <Route path="/" element={<Home />}></Route>
-                <Route path="/about" element={<About />}></Route>
-                <Route path="/products" element={<StoreFront />}></Route>
-                <Route path="/products/:id" element={<ProductDetails />}>
-                  <Route
-                    path="/products/:id/delivery"
-                    element={<ProductDelivery />}
-                  ></Route>
-                  <Route path="*" element={<NotFound />}></Route>
-                </Route>
-              </Routes>
-            </main>
-          </BrowserRouter>
-        </SWRConfig>
-
-        <button className="btn btn-outline" onClick={() => setLoggedIn(false)}>
-          Logout
-        </button>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <h2>Please login</h2>
-        <button className="btn btn-primary" onClick={() => setLoggedIn(true)}>
-          Login
-        </button>
-      </>
-    );
-  }
+              <Route path="/Cart" element={<Cart />}></Route>
+              <Route path="*" element={<NotFound />}></Route>
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </SWRConfig>
+    </>
+  );
 }
