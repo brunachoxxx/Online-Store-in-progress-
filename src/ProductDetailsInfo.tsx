@@ -1,4 +1,4 @@
-export default function ProductDetailInfo() {
+export default function ProductDetailInfo({ onProductAdd }: any) {
   return (
     <>
       <p>

@@ -4,7 +4,7 @@ import Loader from "./Loader";
 import Product from "./Product";
 import { Link } from "react-router-dom";
 
-export default function Products() {
+export default function Products({ cart, onProductAdd, onProductDelete }: any) {
   const {
     data: products,
     isLoading,
@@ -25,9 +25,12 @@ export default function Products() {
           {isLoading && <Loader />}
           {products &&
             products.map((product: any) => (
-              <Link to={"/products/" + product.id}>
-                <Product details={product}></Product>
-              </Link>
+              <Product
+                details={product}
+                cart={cart}
+                onProductAdd={onProductAdd}
+                onProductDelete={onProductDelete}
+              ></Product>
             ))}
         </div>
       </div>

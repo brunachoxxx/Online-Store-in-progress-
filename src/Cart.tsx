@@ -1,7 +1,6 @@
-export default function Cart() {
+export default function Cart({ cart }: any) {
   return (
     <>
-      C
       <div className="cart-layout">
         <div>
           <h1>Your Cart</h1>

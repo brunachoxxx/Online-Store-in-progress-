@@ -3,7 +3,7 @@ import useSWR from "swr";
 import fetcher, { productsUrl } from "./Fetcher";
 import Loader from "./Loader";
 
-export default function ProductDetailInfo() {
+export default function ProductDetailInfo({ onProductAdd }: any) {
   const { id } = useParams();
   const {
     data: product,
@@ -36,6 +36,7 @@ export default function ProductDetailInfo() {
                   <NavLink
                     to=""
                     className={({ isActive }) => (isActive ? "tab-active" : "")}
+                    end
                   >
                     Details
                   </NavLink>
