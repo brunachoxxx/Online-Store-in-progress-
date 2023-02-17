@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
-
-export default function Products({
+import Button from "./Button";
+export default function Product({
   details,
   cart,
   onProductAdd,
   onProductDelete,
 }: any) {
-  console.log(details);
+  const inCart = cart.find((product: any) => product.id === details.id);
+
+  const quantity = inCart ? inCart.quantity : 0;
+
   return (
     <>
       <div className="product">
@@ -21,7 +24,7 @@ export default function Products({
             />
           </Link>
           <div className="product-quantity-container">
-            <div className="product-quantity">0</div>
+            {quantity > 0 && <div className="product-quantity">{quantity}</div>}
           </div>
         </div>
         <Link to={"/products/" + details.id}>
@@ -32,16 +35,19 @@ export default function Products({
         </Link>
         <div className="product-checkout">
           <div>
-            <button
-              className="product-delete"
-              onClick={() => onProductDelete(details.id)}
-            >
-              x
-            </button>
+            {quantity > 0 && (
+              <Button
+                outline
+                className="product-delete"
+                onClick={() => onProductDelete(details.id)}
+              >
+                x
+              </Button>
+            )}
           </div>
-          <button onClick={() => onProductAdd(details)}>
+          <Button outline onClick={() => onProductAdd(details)}>
             ${details.price}
-          </button>
+          </Button>
         </div>
       </div>
     </>

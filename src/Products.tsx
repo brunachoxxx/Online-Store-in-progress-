@@ -2,7 +2,6 @@ import useSWR from "swr";
 import fetcher, { productsUrl } from "./Fetcher";
 import Loader from "./Loader";
 import Product from "./Product";
-import { Link } from "react-router-dom";
 
 export default function Products({ cart, onProductAdd, onProductDelete }: any) {
   const {
@@ -13,7 +12,6 @@ export default function Products({ cart, onProductAdd, onProductDelete }: any) {
   if (error) {
     console.log(error);
   }
-  console.log(products);
 
   return (
     <>
@@ -26,6 +24,7 @@ export default function Products({ cart, onProductAdd, onProductDelete }: any) {
           {products &&
             products.map((product: any) => (
               <Product
+                key={product.id}
                 details={product}
                 cart={cart}
                 onProductAdd={onProductAdd}

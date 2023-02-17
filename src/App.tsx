@@ -17,7 +17,9 @@ export default function App() {
 
   function handleProductAdd(newProduct: any) {
     //check if product exist
-    const alreadyOnCart = cart.find((product: {}) => product === newProduct);
+    const alreadyOnCart = cart.find(
+      (product: any) => product.id === newProduct.id
+    );
 
     if (alreadyOnCart) {
       //map the cart and find the product and return product.quantity++
@@ -37,12 +39,14 @@ export default function App() {
       setCart([...cart, { ...newProduct, quantity: 1 }]);
     }
   }
-  function handleProductDelete(id: number) {
+
+  function handleProductDelete(id: any) {
     const updatedCart = cart.filter((product: any) => {
-      product.id !== id;
+      return product.id !== id;
     });
     setCart(updatedCart);
   }
+
   return (
     <>
       <SWRConfig>
@@ -82,7 +86,7 @@ export default function App() {
                 ></Route>
               </Route>
 
-              <Route path="/Cart" element={<Cart cart={cart} />}></Route>
+              <Route path="/cart" element={<Cart cart={cart} />}></Route>
               <Route path="*" element={<NotFound />}></Route>
             </Routes>
           </div>

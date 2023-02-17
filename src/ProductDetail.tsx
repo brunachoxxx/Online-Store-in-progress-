@@ -3,7 +3,7 @@ import useSWR from "swr";
 import fetcher, { productsUrl } from "./Fetcher";
 import Loader from "./Loader";
 
-export default function ProductDetailInfo({ onProductAdd }: any) {
+export default function ProductDetail({ onProductAdd }: any) {
   const { id } = useParams();
   const {
     data: product,
@@ -13,7 +13,7 @@ export default function ProductDetailInfo({ onProductAdd }: any) {
   if (error) {
     console.log(error);
   }
-  console.log(product);
+
   return (
     <>
       {isLoading && <Loader />}
