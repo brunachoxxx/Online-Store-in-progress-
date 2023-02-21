@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import Button from "./Button";
-export default function Product({
-  details,
-  cart,
-  onProductAdd,
-  onProductDelete,
-}: any) {
-  const inCart = cart.find((product: any) => product.id === details.id);
+import { useSelector, useDispatch } from "react-redux";
+import { addProduct, removeProduct } from "./store.js";
 
-  const quantity = inCart ? inCart.quantity : 0;
+export default function Product({ details }: any) {
+  const dispatch = useDispatch();
+  const cart = useSelector((state: any) => state.cart);
+  const productFromCart = cart.find(
+    (product: any) => product.id === details.id
+  );
+  const quantity = productFromCart ? productFromCart.quantity : 0;
+  const onProductAdd = () => dispatch(addProduct(details));
+  const onProductdelete = () => dispatch(removeProduct(details));
 
   return (
     <>
@@ -39,13 +42,13 @@ export default function Product({
               <Button
                 outline
                 className="product-delete"
-                onClick={() => onProductDelete(details.id)}
+                onClick={() => onProductdelete()}
               >
                 x
               </Button>
             )}
           </div>
-          <Button outline onClick={() => onProductAdd(details)}>
+          <Button outline onClick={() => onProductAdd()}>
             ${details.price}
           </Button>
         </div>

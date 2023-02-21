@@ -51,31 +51,14 @@ export default function App() {
     <>
       <SWRConfig>
         <BrowserRouter>
-          <NavBar cart={cart} />
+          <NavBar />
           <div className="container">
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/about" element={<About />}></Route>
-              <Route
-                path="/products/"
-                element={
-                  <Products
-                    cart={cart}
-                    onProductAdd={handleProductAdd}
-                    onProductDelete={handleProductDelete}
-                  />
-                }
-              ></Route>
-              <Route
-                path="/products/:id/"
-                element={<ProductDetails onProductAdd={handleProductAdd} />}
-              >
-                <Route
-                  path=""
-                  element={
-                    <ProductDetailInfo onProductAdd={handleProductAdd} />
-                  }
-                ></Route>
+              <Route path="/products/" element={<Products />}></Route>
+              <Route path="/products/:id/" element={<ProductDetails />}>
+                <Route path="" element={<ProductDetailInfo />}></Route>
                 <Route
                   path="nutrition"
                   element={<ProductDetailNutrition />}
@@ -86,7 +69,7 @@ export default function App() {
                 ></Route>
               </Route>
 
-              <Route path="/cart" element={<Cart cart={cart} />}></Route>
+              <Route path="/cart" element={<Cart />}></Route>
               <Route path="*" element={<NotFound />}></Route>
             </Routes>
           </div>

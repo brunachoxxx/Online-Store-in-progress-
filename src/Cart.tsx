@@ -1,7 +1,10 @@
-export default function Cart({ cart }: any) {
-  const totalPrice = cart.reduce((total: any, product: any) => {
-    total + product.price * product.quantity;
-  }, 0);
+import { useSelector } from "react-redux";
+import { cartValueSelector } from "./store.js";
+
+export default function Cart() {
+  const cart = useSelector((state: any) => state.cart);
+  const totalPrice = useSelector(cartValueSelector);
+  console.log(cart);
   return (
     <>
       <div className="cart-layout">
@@ -17,9 +20,9 @@ export default function Cart({ cart }: any) {
                   <th datra-width="25%" className="th-product">
                     Product
                   </th>
-                  <th datra-width="20%">Unit price</th>
-                  <th datra-width="10%">Quanity</th>
-                  <th datra-width="25%">Total</th>
+                  <th data-width="20%">Unit price</th>
+                  <th data-width="10%">Quanity</th>
+                  <th data-width="25%">Total</th>
                 </tr>
               </thead>
               <tbody>

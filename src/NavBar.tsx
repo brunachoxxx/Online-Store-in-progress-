@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { cartCountSelector } from "./store.js";
 
-export default function Nav({ cart }: any) {
-  const cartQuantity = cart.reduce((total: any, product: any) => {
-    return total + product.quantity;
-  }, 0);
+export default function Nav() {
+  const cartQuantity = useSelector(cartCountSelector);
   return (
     <nav className="navbar">
       <NavLink to="/" className="nav-brand">
