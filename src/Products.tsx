@@ -3,7 +3,17 @@ import fetcher, { productsUrl } from "./Fetcher";
 import Loader from "./Loader";
 import Product from "./Product";
 
-export default function Products({ cart, onProductAdd, onProductDelete }: any) {
+interface Iproduct {
+  description: string;
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  price_id: string;
+  quantity: number;
+}
+
+export default function Products() {
   const {
     data: products,
     isLoading,
@@ -22,14 +32,8 @@ export default function Products({ cart, onProductAdd, onProductDelete }: any) {
         <div className="products-grid">
           {isLoading && <Loader />}
           {products &&
-            products.map((product: any) => (
-              <Product
-                key={product.id}
-                details={product}
-                cart={cart}
-                onProductAdd={onProductAdd}
-                onProductDelete={onProductDelete}
-              ></Product>
+            products.map((product: Iproduct) => (
+              <Product key={product.id} details={product}></Product>
             ))}
         </div>
       </div>

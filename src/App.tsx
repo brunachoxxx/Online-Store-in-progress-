@@ -12,18 +12,28 @@ import ProductDetailNutrition from "./ProductDetailsnutrition";
 import ProductDetailStorage from "./ProductDetailStorage";
 import { useState } from "react";
 
+interface Iproduct {
+  description: string;
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  price_id: string;
+  quantity: number;
+}
+
 export default function App() {
   const [cart, setCart]: any = useState([]);
 
-  function handleProductAdd(newProduct: any) {
+  function handleProductAdd(newProduct: Iproduct) {
     //check if product exist
     const alreadyOnCart = cart.find(
-      (product: any) => product.id === newProduct.id
+      (product: Iproduct) => product.id === newProduct.id
     );
 
     if (alreadyOnCart) {
       //map the cart and find the product and return product.quantity++
-      const updatedCart = cart.map((product: any) => {
+      const updatedCart = cart.map((product: Iproduct) => {
         //if find the product
         if (product.id === newProduct.id) {
           //return quantity++
@@ -40,8 +50,8 @@ export default function App() {
     }
   }
 
-  function handleProductDelete(id: any) {
-    const updatedCart = cart.filter((product: any) => {
+  function handleProductDelete(id: number) {
+    const updatedCart = cart.filter((product: Iproduct) => {
       return product.id !== id;
     });
     setCart(updatedCart);

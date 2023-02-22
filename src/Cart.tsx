@@ -1,6 +1,16 @@
 import { useSelector } from "react-redux";
 import { cartValueSelector } from "./store.js";
 
+interface Iproduct {
+  description: string;
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  price_id: string;
+  quantity: number;
+}
+
 export default function Cart() {
   const cart = useSelector((state: any) => state.cart);
   const totalPrice = useSelector(cartValueSelector);
@@ -26,7 +36,7 @@ export default function Cart() {
                 </tr>
               </thead>
               <tbody>
-                {cart.map((product: any) => {
+                {cart.map((product: Iproduct) => {
                   return (
                     <tr key={product.id}>
                       <td>

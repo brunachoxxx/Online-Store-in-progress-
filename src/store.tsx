@@ -1,5 +1,15 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
+interface Iproduct {
+  description: string;
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  price_id: string;
+  quantity: number;
+}
+
 const initialState = {
   cart: [],
 };
@@ -10,7 +20,7 @@ const cartSlice = createSlice({
   reducers: {
     addProduct: (state: any, action: any) => {
       const existingProduct = state.cart.find(
-        (product: any) => product.id === action.payload.id
+        (product: Iproduct) => product.id === action.payload.id
       );
       if (existingProduct) {
         // immer makes this immutable
@@ -22,7 +32,7 @@ const cartSlice = createSlice({
     },
     removeProduct: (state: any, action: any) => {
       const index = state.cart.findIndex(
-        (product: any) => product.id === action.payload.id
+        (product: Iproduct) => product.id === action.payload.id
       );
       // immer makes this immutable
       state.cart.splice(index, 1);
@@ -38,14 +48,14 @@ const { addProduct, removeProduct } = cartSlice.actions;
 
 const cartCountSelector = (state: any) => {
   return state.cart.reduce(
-    (total: any, product: any) => total + product.quantity,
+    (total: any, product: Iproduct) => total + product.quantity,
     0
   );
 };
 
 const cartValueSelector = (state: any) => {
   return state.cart.reduce(
-    (total: any, product: any) => total + product.price * product.quantity,
+    (total: any, product: Iproduct) => total + product.price * product.quantity,
     0
   );
 };

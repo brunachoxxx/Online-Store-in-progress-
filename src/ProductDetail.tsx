@@ -2,14 +2,34 @@ import { useParams, NavLink, Outlet } from "react-router-dom";
 import useSWR from "swr";
 import fetcher, { productsUrl } from "./Fetcher";
 import Loader from "./Loader";
+import { useOutletContext } from "react-router-dom";
 
-export default function ProductDetail({ onProductAdd }: any) {
+interface IproductInfo {
+  description: string;
+  id: number;
+  image: string;
+  name: string;
+  nutrition: {
+    carbs: number;
+    fat: number;
+    protein: number;
+    salt: number;
+  };
+  price: number;
+  price_id: string;
+  storage: string;
+}
+
+export default function ProductDetail() {
   const { id } = useParams();
   const {
     data: product,
     isLoading,
     error,
-  } = useSWR(productsUrl + `productinfo/id${id}.json`, fetcher);
+  } = useSWR<IproductInfo, string>(
+    productsUrl + `productinfo/id${id}.json`,
+    fetcher
+  );
   if (error) {
     console.log(error);
   }

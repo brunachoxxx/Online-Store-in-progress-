@@ -3,11 +3,21 @@ import Button from "./Button";
 import { useSelector, useDispatch } from "react-redux";
 import { addProduct, removeProduct } from "./store.js";
 
+interface Iproduct {
+  description: string;
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  price_id: string;
+  quantity: number;
+}
+
 export default function Product({ details }: any) {
   const dispatch = useDispatch();
   const cart = useSelector((state: any) => state.cart);
   const productFromCart = cart.find(
-    (product: any) => product.id === details.id
+    (product: Iproduct) => product.id === details.id
   );
   const quantity = productFromCart ? productFromCart.quantity : 0;
   const onProductAdd = () => dispatch(addProduct(details));
