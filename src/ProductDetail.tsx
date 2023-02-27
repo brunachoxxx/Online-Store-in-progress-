@@ -2,23 +2,7 @@ import { useParams, NavLink, Outlet } from "react-router-dom";
 import useSWR from "swr";
 import fetcher, { productsUrl } from "./Fetcher";
 import Loader from "./Loader";
-import { useOutletContext } from "react-router-dom";
-
-interface IproductInfo {
-  description: string;
-  id: number;
-  image: string;
-  name: string;
-  nutrition: {
-    carbs: number;
-    fat: number;
-    protein: number;
-    salt: number;
-  };
-  price: number;
-  price_id: string;
-  storage: string;
-}
+import type { IproductInfo } from "./IntnTypes.js";
 
 export default function ProductDetail() {
   const { id } = useParams();

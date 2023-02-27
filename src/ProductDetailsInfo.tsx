@@ -2,10 +2,11 @@ import Button from "./Button";
 import { useOutletContext } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addProduct } from "./store";
+import type { Iproduct } from "./IntnTypes.js";
 
 export default function ProductDetailInfo() {
   const dispatch = useDispatch();
-  const product: any = useOutletContext();
+  const product: Iproduct = useOutletContext();
   const onProductAdd = () => dispatch(addProduct(product));
 
   return (

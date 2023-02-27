@@ -2,24 +2,16 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 import { useSelector, useDispatch } from "react-redux";
 import { addProduct, removeProduct } from "./store.js";
+import { RootState } from "./store.js";
+import type { Iproduct } from "./IntnTypes.js";
 
-interface Iproduct {
-  description: string;
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  price_id: string;
-  quantity: number;
-}
-
-export default function Product({ details }: any) {
+export default function Product({ details }: { details: Iproduct }) {
   const dispatch = useDispatch();
-  const cart = useSelector((state: any) => state.cart);
+  const cart = useSelector((state: RootState) => state.cart);
   const productFromCart = cart.find(
     (product: Iproduct) => product.id === details.id
   );
-  const quantity = productFromCart ? productFromCart.quantity : 0;
+  const quantity: number = productFromCart ? productFromCart.quantity : 0;
   const onProductAdd = () => dispatch(addProduct(details));
   const onProductdelete = () => dispatch(removeProduct(details));
 

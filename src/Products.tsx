@@ -2,23 +2,14 @@ import useSWR from "swr";
 import fetcher, { productsUrl } from "./Fetcher";
 import Loader from "./Loader";
 import Product from "./Product";
-
-interface Iproduct {
-  description: string;
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  price_id: string;
-  quantity: number;
-}
+import type { Iproduct } from "./IntnTypes.js";
 
 export default function Products() {
   const {
     data: products,
     isLoading,
     error,
-  } = useSWR(productsUrl + "supermarket.json", fetcher);
+  } = useSWR<Iproduct[], string>(productsUrl + "supermarket.json", fetcher);
   if (error) {
     console.log(error);
   }

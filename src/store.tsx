@@ -1,16 +1,12 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type { Iproduct } from "./IntnTypes.js";
 
-interface Iproduct {
-  description: string;
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  price_id: string;
-  quantity: number;
+export interface cartState {
+  cart: Iproduct[];
 }
 
-const initialState = {
+const initialState: cartState = {
   cart: [],
 };
 
@@ -18,7 +14,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addProduct: (state: any, action: any) => {
+    addProduct: (state, action: PayloadAction<Iproduct>) => {
       const existingProduct = state.cart.find(
         (product: Iproduct) => product.id === action.payload.id
       );
@@ -30,7 +26,7 @@ const cartSlice = createSlice({
         state.cart.push({ ...action.payload, quantity: 1 });
       }
     },
-    removeProduct: (state: any, action: any) => {
+    removeProduct: (state, action: PayloadAction<Iproduct>) => {
       const index = state.cart.findIndex(
         (product: Iproduct) => product.id === action.payload.id
       );
@@ -46,7 +42,7 @@ const store = configureStore({
 
 const { addProduct, removeProduct } = cartSlice.actions;
 
-const cartCountSelector = (state: any) => {
+const cartCountSelector = (state: RootState) => {
   return state.cart.reduce(
     (total: any, product: Iproduct) => total + product.quantity,
     0
@@ -67,3 +63,6 @@ export {
   cartCountSelector,
   cartValueSelector,
 };
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

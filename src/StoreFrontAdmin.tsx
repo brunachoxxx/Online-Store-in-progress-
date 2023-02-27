@@ -1,5 +1,4 @@
 import { useState } from "react";
-import ProductsList from "./ProductsList.js";
 import AddProductForm from "./AddProductForm.js";
 import useFetch from "./useFetch.js";
 

@@ -1,18 +1,10 @@
 import { useSelector } from "react-redux";
 import { cartValueSelector } from "./store.js";
-
-interface Iproduct {
-  description: string;
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  price_id: string;
-  quantity: number;
-}
+import { RootState } from "./store.js";
+import type { Iproduct } from "./IntnTypes.js";
 
 export default function Cart() {
-  const cart = useSelector((state: any) => state.cart);
+  const cart = useSelector((state: RootState) => state.cart);
   const totalPrice = useSelector(cartValueSelector);
   console.log(cart);
   return (

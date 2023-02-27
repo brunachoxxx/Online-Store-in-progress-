@@ -10,53 +10,8 @@ import ProductDetails from "./ProductDetail";
 import ProductDetailInfo from "./ProductDetailsInfo";
 import ProductDetailNutrition from "./ProductDetailsnutrition";
 import ProductDetailStorage from "./ProductDetailStorage";
-import { useState } from "react";
-
-interface Iproduct {
-  description: string;
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  price_id: string;
-  quantity: number;
-}
 
 export default function App() {
-  const [cart, setCart]: any = useState([]);
-
-  function handleProductAdd(newProduct: Iproduct) {
-    //check if product exist
-    const alreadyOnCart = cart.find(
-      (product: Iproduct) => product.id === newProduct.id
-    );
-
-    if (alreadyOnCart) {
-      //map the cart and find the product and return product.quantity++
-      const updatedCart = cart.map((product: Iproduct) => {
-        //if find the product
-        if (product.id === newProduct.id) {
-          //return quantity++
-          return { ...product, quantity: product.quantity + 1 };
-        }
-        //if not find the prduct return product
-        return product;
-      });
-      //add udapted cart to de cart
-      setCart(updatedCart);
-    } else {
-      //if is a new product add it to the cart with quantity 1
-      setCart([...cart, { ...newProduct, quantity: 1 }]);
-    }
-  }
-
-  function handleProductDelete(id: number) {
-    const updatedCart = cart.filter((product: Iproduct) => {
-      return product.id !== id;
-    });
-    setCart(updatedCart);
-  }
-
   return (
     <>
       <SWRConfig>
