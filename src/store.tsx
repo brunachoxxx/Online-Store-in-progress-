@@ -49,7 +49,7 @@ const cartCountSelector = (state: RootState) => {
   );
 };
 
-const cartValueSelector = (state: any) => {
+const cartValueSelector = (state: RootState) => {
   return state.cart.reduce(
     (total: any, product: Iproduct) => total + product.price * product.quantity,
     0
